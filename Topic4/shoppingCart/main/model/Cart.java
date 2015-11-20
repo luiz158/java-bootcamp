@@ -26,8 +26,8 @@ public class Cart {
 		return items;
 	}
 
-	public void addItem(Item item){
-		this.getItems().add(item);
+	public boolean addItem(Item item){
+		return this.getItems().add(item);
 	}
 
 	public BigDecimal getTotalAmount(){
