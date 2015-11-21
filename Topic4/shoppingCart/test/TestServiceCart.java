@@ -30,8 +30,7 @@ public class TestServiceCart {
 	@Test
 	public void testGetCart() {
 		try {
-			Cart cart = new Cart(1);
-			assertEquals(cart, serviceCart.getCartBy(1));
+			assertEquals(new Cart(2), serviceCart.getCartBy(2));
 		} catch (CartNotFound e) {
 			System.out.println(e.getMessage());
 		}
@@ -40,7 +39,7 @@ public class TestServiceCart {
 	@Test
 	public void testAddItem() {
 		try {
-			assertEquals(true, serviceCart.addItem(2, tv));
+			assertEquals(true, serviceCart.addItem(1, tv));
 		} catch (CartNotFound e) {
 			System.out.println(e.getMessage());
 		}
@@ -49,7 +48,8 @@ public class TestServiceCart {
 	@Test
 	public void testGetItems() {
 		try {
-			assertEquals(tv, serviceCart.getItems(2).get(0));
+			assertEquals(true, serviceCart.addItem(1, tv));
+			assertEquals(tv, serviceCart.getItems(1).get(0));
 		} catch (CartNotFound e) {
 			System.out.println(e.getMessage());
 		}
