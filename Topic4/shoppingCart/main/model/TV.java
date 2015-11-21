@@ -8,13 +8,14 @@ public class TV implements Item {
 	private double screenSize;
 
 	public TV() {
-		
+
 	}
-	
+
 	public TV(String price, double screenSize) {
-		this.price = new BigDecimal(price); // I don't know if it's right
+		this.price = new BigDecimal(price);
 		this.screenSize = screenSize;
 	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}
@@ -26,8 +27,8 @@ public class TV implements Item {
 	public double getScreenSize() {
 		return this.screenSize;
 	}
-	
-	public String getList(){
+
+	public String getList() {
 		return "Item TV " + this.getScreenSize() + "....... $ " + this.getPrice();
 	}
 
@@ -60,5 +61,5 @@ public class TV implements Item {
 			return false;
 		return true;
 	}
-	
+
 }
