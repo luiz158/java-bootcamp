@@ -14,7 +14,6 @@ public interface MeetingRepository extends org.springframework.data.repository.R
 	public List<Meeting> findAll();
 	public Meeting save(Meeting meeting);
 	public Optional<Meeting> findOne(@Param("idMeetings") Long idMeetings);
-	public void update(Meeting meeting);
 	public void delete(@Param("idMeetings") Long idMeetings);
 
 }

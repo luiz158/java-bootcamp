@@ -28,8 +28,7 @@ public class MeetingServiceImp implements MeetingService {
 
 	@Override
 	public Long addMeeting(Meeting meeting) {
-		// TODO Auto-generated method stub
-		return 0l;
+		return meetingRepository.save(meeting).getIdMeetings();
 	}
 
 	@Override
@@ -46,13 +45,12 @@ public class MeetingServiceImp implements MeetingService {
 		currentMeeting.setRoom(meeting.getRoom());
 		currentMeeting.setAttendees(meeting.getAttendees());
 
-		meetingRepository.update(currentMeeting);
+		meetingRepository.save(currentMeeting);
 	}
 
 	@Override
 	public void deleteMeeting(Long idMeetings) {
-		// TODO Auto-generated method stub
-
+		meetingRepository.delete(idMeetings);
 	}
 
 }
