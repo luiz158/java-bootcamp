@@ -167,6 +167,250 @@ public class MealDirector {
 
 }
 ```
+### Prototype
+
+Crea clones de objetos. Ahorra subclasas para crear objetos vs. Abstract Factory. 
+
+```java
+public interface Prototype {
+
+	public Prototype doClone();
+
+}
+
+public class Person implements Prototype {
+
+	String name;
+
+	public Person(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public Prototype doClone() {
+		return new Person(name);
+	}
+
+	public String toString() {
+		return "This person is named " + name;
+	}
+}
+```
+
+## Structural Patterns
+
+### Adapter
+
+La clase Adapter traduce requests de otra clase (la _adaptada_). Modifica la interfaz de una clase para que pueda trabajar con otra.
+
+### Composite
+
+In the composite pattern, a tree structure exists where identical operations can be performed on leaves and nodes. A node in a tree is a class that can have children. A node class is a 'composite' class. A leaf in a tree is a 'primitive' class that does not have children. The children of a composite can be leaves or other composites.
+ 
+La clase composite tiene metodos add, remove.
+
+```java
+class CompositeGraphic implements Graphic {
+
+    //Collection of child graphics.
+    private List<Graphic> childGraphics = new ArrayList<Graphic>();
+
+    //Prints the graphic.
+    public void print() {
+        for (Graphic graphic : childGraphics) {
+            graphic.print();
+        }
+    }
+
+    //Adds the graphic to the composition.
+    public void add(Graphic graphic) {
+        childGraphics.add(graphic);
+    }
+
+    //Removes the graphic from the composition.
+    public void remove(Graphic graphic) {
+        childGraphics.remove(graphic);
+    }
+}
+```
+
+### Proxy
+
+The proxy pattern is a structural design pattern. In the proxy pattern, a proxy class is used to control access to another class. The reasons for this control can vary. As one example, a proxy may avoid instantiation of an object until the object is needed. This can be useful if the object requires a lot of time or resources to create. Another reason to use a proxy is to control access rights to an object. A client request may require certain credentials in order to access the object.
+
+### Decorator
+
+The decorator pattern is a structural design pattern. Whereas inheritance adds functionality to classes, the decorator pattern adds functionality to objects by wrapping objects in other objects. Each time additional functionality is required, the object is wrapped in another object. JavaSW I/O streams are a well-known example of the decorator pattern.
+
+Permite agregar funcionalidades a un objeto en runtime.
+
+```java
+public class LivingAnimal implements Animal {
+
+	@Override
+	public void describe() {
+		System.out.println("\nI am an animal.");
+	}
+	
+// clase abstract decorator
+
+public abstract class AnimalDecorator implements Animal {
+
+	Animal animal;
+
+	public AnimalDecorator(Animal animal) {
+		this.animal = animal;
+	}
+
+}
+
+// decorator
+
+public class LegDecorator extends AnimalDecorator {
+
+	public LegDecorator(Animal animal) {
+		super(animal);
+	}
+
+	@Override
+	public void describe() {
+		animal.describe();
+		System.out.println("I have legs.");
+		dance();
+	}
+
+	public void dance() {
+		System.out.println("I can dance.");
+	}
+
+}
+
+}
+```
+
+## Behavioral patterns
+
+### Observer
+
+The observer pattern is a behavioral object design pattern. In the observer pattern, an object called the subject maintains a collection of objects called observers. When the subject changes, it notifies the observers. Observers can be added or removed from the collection of observers in the subject. The changes in state of the subject can be passed to the observers so that the observers can change their own state to reflect this change.
+
+### Chain of responsability
+
+Use Chain of Responsibility when
+
+- more than one object may handle a request, and the handler isn't known a priori. The handler should be ascertained automatically
+- you want to issue a request to one of several objects without specifying the receiver explicitly
+- the set of objects that can handle a request should be specified dynamically
+
+### Strategy
+
+Interfaz Strategy y clases ConcreteStrategy que implementan el algoritmo. Util cuando hay distintos algoritmos o se desea encapsular la informacion.
+
+```java
+public interface Strategy {
+
+	boolean checkTemperature(int temperatureInF);
+
+}
+
+public class HikeStrategy implements Strategy {
+
+	@Override
+	public boolean checkTemperature(int temperatureInF) {
+		if ((temperatureInF >= 50) && (temperatureInF <= 90)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+}
+```
+
+### Iterator
+
+Implementacion de la interfaz Iterator provista por Java para adaptarla a una clase.
+
+```java
+public class Menu {
+
+	List<Item> menuItems;
+
+	public Menu() {
+		menuItems = new ArrayList<Item>();
+	}
+
+	public void addItem(Item item) {
+		menuItems.add(item);
+	}
+
+	public Iterator<Item> iterator() {
+		return new MenuIterator();
+	}
+
+	class MenuIterator implements Iterator<Item> {
+		int currentIndex = 0;
+
+		@Override
+		public boolean hasNext() {
+			if (currentIndex >= menuItems.size()) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		@Override
+		public Item next() {
+			return menuItems.get(currentIndex++);
+		}
+
+		@Override
+		public void remove() {
+			menuItems.remove(--currentIndex);
+		}
+
+	}
+
+}
+```
+
+## Memento
+
+The memento pattern is a behavioral design pattern. The memento pattern is used to store an object's state so that this state can be restored at a later point. The saved state data in the memento object is not accessible outside of the object to be saved and restored. This protects the integrity of the saved state data.
+
+```java
+public class DietInfo {
+
+	String personName;
+	int dayNumber;
+	int weight;
+
+	public Memento save() {
+		return new Memento(personName, dayNumber, weight);
+	}
+
+	public void restore(Object objMemento) {
+		Memento memento = (Memento) objMemento;
+		personName = memento.mementoPersonName;
+		dayNumber = memento.mementoDayNumber;
+		weight = memento.mementoWeight;
+	}
+
+	// memento - object that stores the saved state of the originator
+	private class Memento {
+		String mementoPersonName;
+		int mementoDayNumber;
+		int mementoWeight;
+
+		public Memento(String personName, int dayNumber, int weight) {
+			mementoPersonName = personName;
+			mementoDayNumber = dayNumber;
+			mementoWeight = weight;
+		}
+	}
+}
+```
 
 
 
