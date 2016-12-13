@@ -1,4 +1,4 @@
-package Topic0.ex2;
+package src.Topic0.ex1;
 
 public class Rectangle {
 
