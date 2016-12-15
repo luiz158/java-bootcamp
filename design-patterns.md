@@ -238,6 +238,42 @@ class CompositeGraphic implements Graphic {
 
 The proxy pattern is a structural design pattern. In the proxy pattern, a proxy class is used to control access to another class. The reasons for this control can vary. As one example, a proxy may avoid instantiation of an object until the object is needed. This can be useful if the object requires a lot of time or resources to create. Another reason to use a proxy is to control access rights to an object. A client request may require certain credentials in order to access the object.
 
+```java
+public interface DBConnection {
+
+    void connect();
+}
+
+public class MySQLConnection implements DBConnection {
+
+    public MySQLConnection() {
+        resourcefulTask();
+    }
+
+    @Override
+    public void connect() {
+        System.out.println("Connecting...");
+    }
+
+    public void resourcefulTask() {
+        System.out.println("Resourceful task has been executed.");
+    }
+}
+
+public class ProxyMySQLConnection implements DBConnection {
+
+    private MySQLConnection connection;
+
+    @Override
+    public void connect() {
+        if (connection == null) {
+            connection = new MySQLConnection();
+        }
+        connection.connect();
+    }
+}
+```
+
 ### Decorator
 
 The decorator pattern is a structural design pattern. Whereas inheritance adds functionality to classes, the decorator pattern adds functionality to objects by wrapping objects in other objects. Each time additional functionality is required, the object is wrapped in another object. JavaSW I/O streams are a well-known example of the decorator pattern.
