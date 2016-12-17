@@ -137,6 +137,7 @@ mvn site
 mvn clean
 mvn idea:idea —- descriptor para IntelliJ
 mvn eclipse:eclipse — para Eclipse
+```
 
 Crear web app:
 
