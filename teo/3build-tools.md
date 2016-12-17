@@ -62,6 +62,8 @@ Ejecutar .jar generado:
 
 ```
 java -cp foo.jar full.package.name.ClassName
+
+java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App
 ```
 
 - groupId: company name
@@ -135,6 +137,17 @@ mvn site
 mvn clean
 mvn idea:idea —- descriptor para IntelliJ
 mvn eclipse:eclipse — para Eclipse
+
+Crear web app:
+
+```
+$ mvn archetype:generate -DgroupId=com.mkyong -DartifactId=CounterWebApp -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+```
+
+
+
+
+
 
 
 
